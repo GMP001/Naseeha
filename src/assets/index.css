@@ -1,0 +1,28 @@
+:root {
+  --pale-green: #81C784;
+}
+
+/* Marquee */
+.marquee {
+  background-color: var(--pale-green);
+  color: white;
+  font-weight: 700;
+  padding: 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-content {
+  display: inline-flex;
+  gap: 50px;
+  animation: marquee 35s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
