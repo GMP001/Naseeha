@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
           position: 'sticky',
           top: 0,
           zIndex: 999,
-          backgroundColor: 'rgba(47, 130, 119, 0.50)',   // Fixed 50% opacity
+          backgroundColor: 'rgba(47, 130, 119, 0.85)',   // Fixed 50% opacity
           height: '100px',
           display: 'flex',
           alignItems: 'center',

@@ -68,9 +68,10 @@ const QuickDonateBar: React.FC = () => {
           color: 'white',
           transition: 'all 0.3s ease',
           transform: 'scale(1)',
+          paddingLeft: '16px',           // Added left padding
         }}
         dropdownStyle={{ borderRadius: '12px' }}
-        suffixIcon={<span style={{ color: 'white' }}>▼</span>}   // White dropdown arrow
+        suffixIcon={<span style={{ color: 'white' }}>▼</span>}
         onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.08)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
       >
@@ -94,9 +95,10 @@ const QuickDonateBar: React.FC = () => {
           color: 'white',
           transition: 'all 0.3s ease',
           transform: 'scale(1)',
+          paddingLeft: '16px',           // Added left padding
         }}
         dropdownStyle={{ borderRadius: '12px' }}
-        suffixIcon={<span style={{ color: 'white' }}>▼</span>}   // White dropdown arrow
+        suffixIcon={<span style={{ color: 'white' }}>▼</span>}
         onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.08)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
       >

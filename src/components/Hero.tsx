@@ -24,7 +24,11 @@ const Hero: React.FC = () => {
   }, [next]);
 
   return (
-    <section style={{ height: '100vh', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ 
+      height: '85vh', 
+      position: 'relative', 
+      overflow: 'hidden' 
+    }}>
       {/* Current Image */}
       <div style={{
         position: 'absolute',
@@ -47,16 +51,49 @@ const Hero: React.FC = () => {
         transition: 'opacity 0.8s ease-in-out'
       }} />
 
-      <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', alignItems: 'center', padding: '0 60px', color: 'white' }}>
+      <div style={{ 
+        position: 'relative', 
+        zIndex: 2, 
+        height: '100%', 
+        display: 'flex', 
+        alignItems: 'center', 
+        padding: '0 60px', 
+        color: 'white',
+        marginTop: '-100px'        // ← This moves the whole content block up by 100px
+      }}>
         <div style={{ maxWidth: '620px' }}>
-          <h1 style={{ fontSize: '52px', lineHeight: '1.1', fontWeight: 700, marginBottom: '16px' }}>
-            এক ঊম্মাহর পাঁশে দাঁড়াতে নাসীহা ফাউন্ডেসান
+          {/* Main Title - Split into two lines with different colors */}
+          <h1 style={{ 
+            fontSize: '48px', 
+            lineHeight: '1.1', 
+            fontWeight: 700, 
+            marginBottom: '20px' 
+          }}>
+            <span style={{ color: 'white' }}>
+              এক ঊম্মাহর পাঁশে দাঁড়াতে,
+            </span>
+            <br />
+            <span style={{ 
+              color: '#4fd1c0',
+              display: 'block',
+              marginTop: '12px'
+              }}>
+              নাসীহা ফাউন্ডেসান
+            </span>
           </h1>
-          <p style={{ fontSize: '22px', marginBottom: '40px', opacity: 0.95 }}>
-            নাসীহা ফাউন্ডেসান বাংলাদেশে নিবন্ধিত একটি দাতব্য প্রতিষ্ঠান, যা সারাদেশে সহায়তা প্রদান করে।
+
+          {/* Subtitle - Split into two lines */}
+          <p style={{ 
+            fontSize: '22px', 
+            marginBottom: '40px', 
+            opacity: 0.95,
+            lineHeight: '1.4'
+          }}>
+            নাসীহা ফাউন্ডেসান বাংলাদেশে নিবন্ধিত একটি দাতব্য প্রতিষ্ঠান,<br />
+            যা সারাদেশে সহায়তা প্রদান করে। নিবন্ধন নং- এস-১৪০৪৫/২০২৩।
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
-            {/* Learn More Button */}
+            {/* Learn More Button - unchanged */}
             <Button 
               size="large"
               style={{
@@ -72,24 +109,24 @@ const Hero: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.3s ease',           // Smooth transition
-                transform: 'scale(1)',                  // Default scale
+                transition: 'all 0.3s ease',
+                transform: 'scale(1)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'white';
                 e.currentTarget.style.color = '#2f8277e7';
-                e.currentTarget.style.transform = 'scale(1.08)';   // Slight enlarge
+                e.currentTarget.style.transform = 'scale(1.08)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
                 e.currentTarget.style.color = 'white';
-                e.currentTarget.style.transform = 'scale(1)';      // Back to normal
+                e.currentTarget.style.transform = 'scale(1)';
               }}
             >
               আরও জানুন
             </Button>
 
-            {/* Donate Button */}
+            {/* Donate Button - unchanged */}
             <Button 
               type="primary" 
               size="large" 
@@ -106,14 +143,14 @@ const Hero: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                transition: 'all 0.3s ease',           // Smooth transition
-                transform: 'scale(1)',                  // Default scale
+                transition: 'all 0.3s ease',
+                transform: 'scale(1)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.08)';   // Slight enlarge
+                e.currentTarget.style.transform = 'scale(1.08)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';      // Back to normal
+                e.currentTarget.style.transform = 'scale(1)';
               }}
             >
               অনুদান দিন
