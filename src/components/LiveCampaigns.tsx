@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { useNavigate } from "react-router-dom";
 
 import qurbaniImg from '../assets/campaign-qurbani.png';
 import pumpImg from '../assets/Naseeha-Foundation-Hand-Pump.png';
 import madrasaImg from '../assets/Madrasatus-Naseeha.png';
-
 
 // No imports needed - use direct paths from public folder
 const campaigns = [
@@ -36,6 +36,9 @@ const campaigns = [
 ];
 
 const LiveCampaigns: React.FC = () => {
+  
+  const navigate = useNavigate();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({});
 
@@ -162,6 +165,7 @@ const LiveCampaigns: React.FC = () => {
                   অনুদান দিন →
                 </Button>
                 <Button
+                  onClick={() => navigate(`/campaign/${campaign.id}`)}
                   size="large"
                   style={{ borderRadius: '50px', padding: '0 32px', height: '52px', fontSize: '17px', borderColor: '#2f8277', color: '#2f8277' }}
                 >
