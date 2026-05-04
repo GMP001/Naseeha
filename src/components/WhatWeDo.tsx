@@ -6,17 +6,17 @@ const WhatWeDo: React.FC = () => {
   const services = [
     {
       title: "দুর্যোগ সাহায্য",
-      desc: "বন্যা, ঘূর্ণিঝড় ও দুর্যোগ কবলিত এলাকায় খাদ্য, পানি ও জরুরি সাহায্য পৌঁছে দেওয়া।",
+      desc: "বন্যা, ঘূর্ণিঝড় ও জুলাই ট্রাজিডি সহ সকল দুর্যোগ কবলিত এলাকায় খাদ্য, পানি, চিকিৎসা সহ অন্যান্য জরুরি সাহায্য পৌঁছে দেওয়া।",
       icon: "🌍",
     },
-    {
-      title: "মসজিদ ও মাদরাসা",
-      desc: "দেশের বিভিন্ন জেলায় মসজিদ, মাদরাসা নির্মাণ ও সংস্কার কাজে সহায়তা প্রদান।",
+    { 
+      title: "রমাদান ফুড প্রজেক্ট",
+      desc: "রমাদান মাসে দেশের প্রান্তিক, অসচ্ছল ও হত দরিদ্র নামাজী ও রোজাদার মানুষদের ফুড প্যাকেজ বিতরণ করা",
       icon: "🕌",
     },
     {
-      title: "শিক্ষা ও এতিম প্রকল্প",
-      desc: "দরিদ্র ও এতিম শিশুদের শিক্ষা, থাকা-খাওয়া এবং সার্বিক সহায়তা প্রদান।",
+      title: "কোরবানি প্রকল্প",
+      desc: "প্রতি বছর আমাদের লক্ষ্য দেশের দারিদ্র্য-পীড়িত অঞ্চলগুলোতে গরীব মানুষের মাঝে কোরবানি করে, গোস্ত বিতরন করা।",
       icon: "📚",
     },
     {
@@ -26,12 +26,12 @@ const WhatWeDo: React.FC = () => {
     },
     {
     title: "বয়স্ক শিক্ষা কার্যক্রম",
-    desc: "সমাজের প্রবীণ ব্যক্তিদের সঠিক ইসলামী জ্ঞান অর্জনের সুবিধার্থে নাসীহা ফাউন্ডেশন আয়োজন করছে এক বছর মেয়াদী ডিপ্লোমা ইন বেসিক ইসলামিক স্টাডিজ।",
+    desc: "সমাজের প্রবীণ ব্যক্তিদের সঠিক ইসলামী জ্ঞান অর্জনের সুবিধার্থে এক বছর মেয়াদী ডিপ্লোমা ইন বেসিক ইসলামিক স্টাডিজ প্রোগ্রাম।",
     icon: "📖",
   },
   {
     title: "মাদরাসাতুন নাসীহা",
-    desc: "নাসীহা ফাউন্ডেশনের একটি স্বপ্ন সম্পূর্ণ শিক্ষা প্রতিষ্ঠান। এই প্রতিষ্ঠানের মাধ্যমে আমরা শিশুদের আরবি ও ইংরেজি মাধ্যমে শিক্ষা দিয়ে আদর্শ মুসলিম হিসেবে গড়ে তুলতে চাই।",
+    desc: "এই প্রতিষ্ঠানের মাধ্যমে আমরা শিশুদের আরবি ও ইংরেজি মাধ্যমে শিক্ষা দিয়ে আদর্শ মুসলিম হিসেবে গড়ে তুলতে চাই।",
     icon: "🏫",
   },
   ];
@@ -40,17 +40,17 @@ const WhatWeDo: React.FC = () => {
     <section style={{ padding: '80px 60px', backgroundColor: '#f8fafc' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Section Title */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <h2 style={{ 
-            fontSize: '42px', 
+            fontSize: '30px', 
             color: '#2f8277', 
             fontWeight: 700, 
-            marginBottom: '16px' 
+            marginBottom: '10px' 
           }}>
             আমরা যা করি
           </h2>
           <p style={{ 
-            fontSize: '20px', 
+            fontSize: '17px', 
             color: '#475569', 
             maxWidth: '800px', 
             margin: '0 auto',
@@ -64,14 +64,14 @@ const WhatWeDo: React.FC = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '28px',
+          gap: '20px',
         }}>
           {services.map((service, index) => (
             <Card
               key={index}
               style={{
                 borderRadius: '16px',
-                padding: '20px 10px',
+                padding: '30px 10px',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
                 border: '2px solid transparent',
                 height: '100%',
@@ -93,9 +93,10 @@ const WhatWeDo: React.FC = () => {
               }}
             >
               <div style={{ 
-                fontSize: '48px', 
+                fontSize: '40px', 
                 textAlign: 'center', 
-                marginBottom: '20px' 
+                marginBottom: '5px',
+                marginTop: '-30px' 
               }}>
                 {service.icon}
               </div>
@@ -103,7 +104,7 @@ const WhatWeDo: React.FC = () => {
               <h3 style={{ 
                 textAlign: 'center', 
                 color: '#2f8277', 
-                fontSize: '24px', 
+                fontSize: '20px', 
                 fontWeight: 600,
                 marginBottom: '16px'
               }}>
@@ -113,7 +114,7 @@ const WhatWeDo: React.FC = () => {
               <p style={{ 
                 textAlign: 'center', 
                 color: '#475569', 
-                fontSize: '16px', 
+                fontSize: '14px', 
                 lineHeight: '1.7'
               }}>
                 {service.desc}

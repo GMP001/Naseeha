@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
 
   return (
     <section style={{ 
-      height: '85vh', 
+      height: '95vh', 
       position: 'relative', 
       overflow: 'hidden' 
     }}>
@@ -59,12 +59,12 @@ const Hero: React.FC = () => {
         alignItems: 'center', 
         padding: '0 60px', 
         color: 'white',
-        marginTop: '-100px'        // ← This moves the whole content block up by 100px
+        marginTop: '-80px'        // ← This moves the whole content block up by 100px
       }}>
-        <div style={{ maxWidth: '620px' }}>
+        <div style={{ maxWidth: '620px', marginLeft: '-25px' }}>
           {/* Main Title - Split into two lines with different colors */}
           <h1 style={{ 
-            fontSize: '48px', 
+            fontSize: '45px', 
             lineHeight: '1.1', 
             fontWeight: 700, 
             marginBottom: '20px' 
@@ -84,7 +84,8 @@ const Hero: React.FC = () => {
 
           {/* Subtitle - Split into two lines */}
           <p style={{ 
-            fontSize: '22px', 
+            fontSize: '18px', 
+            marginTop: '40px',
             marginBottom: '40px', 
             opacity: 0.95,
             lineHeight: '1.4'
@@ -97,7 +98,7 @@ const Hero: React.FC = () => {
             <Button 
               size="large"
               style={{
-                height: '60px',
+                height: '50px',
                 minWidth: '220px',
                 background: 'rgba(255,255,255,0.1)',
                 color: 'white',
@@ -123,7 +124,7 @@ const Hero: React.FC = () => {
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             >
-              আরও জানুন
+              আরও জানুন 
             </Button>
 
             {/* Donate Button - unchanged */}
@@ -132,7 +133,7 @@ const Hero: React.FC = () => {
               size="large" 
               icon={<HeartOutlined />}
               style={{
-                height: '60px',
+                height: '50px',
                 minWidth: '220px',
                 background: '#2f8277e7',
                 borderRadius: '50px',

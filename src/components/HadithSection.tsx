@@ -1,5 +1,6 @@
 // src/components/HadithSection.tsx
 import React from 'react';
+import bgPattern from '../assets/vecteezy-2.jpg'; 
 
 const HadithSection: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ const HadithSection: React.FC = () => {
       padding: '120px 60px',
       color: 'white',
       textAlign: 'center',
-      backgroundImage: `url('/assets/islamic-pattern.jpg')`, // ← Put your image here
+      backgroundImage: `url(${bgPattern})`, // ← Put your image here
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',

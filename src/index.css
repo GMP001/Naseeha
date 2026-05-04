@@ -1,6 +1,6 @@
 .marquee-container {
-  height: 40px;
-  background-color: #2f8277e7;
+  height: 32px;
+  background-color: #2b8478e7;
   overflow: hidden;
   position: relative;
   z-index: 1000;
@@ -16,7 +16,7 @@
 
 .marquee-text {
   color: white;
-  font-size: 20px;
+  font-size: 14px;
   padding-right: 50px;   /* ← Big gap between messages */
 }
 
@@ -28,6 +28,6 @@
 
 .marquee-text::after {
   content: " • ";
-  font-size: 22px;
+  font-size: 14px;
   opacity: 0.9;
 }

@@ -40,32 +40,32 @@ const QuickDonateBar: React.FC = () => {
         left: 0,
         right: 0,
         backgroundColor: 'rgba(47, 130, 119, 0.95)', // Pale green with good visibility
-        padding: '14px 40px',
+        padding: '10px 30px',
         display: 'flex',
         alignItems: 'center',
-        gap: '20px',
+        gap: '10px',
         zIndex: 1000,
         boxShadow: '0 -4px 12px rgba(0,0,0,0.15)',
         transition: 'all 0.3s ease',
       }}
     >
       {/* Quick Donate Label */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'white', fontWeight: 600, minWidth: '160px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'white', fontWeight: 600, minWidth: '80px' }}>
         <HeartOutlined style={{ fontSize: '22px' }} />
-        <span>Quick Donate</span>
+        <span>দ্রুত দান</span>
       </div>
 
       {/* Type Dropdown */}
       <Select 
         defaultValue="general" 
         style={{ 
-          width: 140, 
+          width: 120, 
           borderRadius: '50px', 
-          height: '50px', 
-          minWidth: '140px', 
-          fontSize: '18px', 
+          height: '40px', 
+          minWidth: '120px', 
+          fontSize: '14px', 
           backgroundColor: '#2f8277',
-          color: 'white',
+          color: '#cdcfce',
           transition: 'all 0.3s ease',
           transform: 'scale(1)',
           paddingLeft: '16px',           // Added left padding
@@ -75,24 +75,24 @@ const QuickDonateBar: React.FC = () => {
         onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.08)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
       >
-        <Option value="general">Type</Option>
-        <Option value="zakat">Zakat</Option>
-        <Option value="qurbani">Qurbani</Option>
-        <Option value="education">Education</Option>
-        <Option value="food">Food Aid</Option>
+        <Option value="general">প্রকার</Option>
+        <Option value="zakat">জাকাত</Option>
+        <Option value="qurbani">কুরবানি</Option>
+        <Option value="education">শিক্ষা</Option>
+        <Option value="food">খাদ্য সাহাজ্য</Option>
       </Select>
 
       {/* Campaign Dropdown */}
       <Select 
         defaultValue="emergency" 
         style={{ 
-          width: 160, 
+          width: 140, 
           borderRadius: '50px', 
-          height: '50px', 
-          minWidth: '160px', 
-          fontSize: '18px', 
+          height: '40px', 
+          minWidth: '140px', 
+          fontSize: '14px', 
           backgroundColor: '#2f8277',
-          color: 'white',
+          color: '#cdcfce',
           transition: 'all 0.3s ease',
           transform: 'scale(1)',
           paddingLeft: '16px',           // Added left padding
@@ -102,34 +102,34 @@ const QuickDonateBar: React.FC = () => {
         onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.08)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
       >
-        <Option value="emergency">Campaign</Option>
-        <Option value="ramadan">Ramadan Relief</Option>
-        <Option value="qurbani2026">Qurbani 2026</Option>
-        <Option value="orphan">Orphan Care</Option>
+        <Option value="emergency">প্রচারণা</Option>
+        <Option value="ramadan">রমজানে সাহাজ্য</Option>
+        <Option value="qurbani2026">কুরবানি ২০২৬</Option>
+        <Option value="orphan">এতিমের যত্ন</Option>
       </Select>
 
       {/* Amount Input Field */}
       <div style={{ 
         display: 'flex', 
-        height: '50px', 
+        height: '40px', 
         minWidth: '160px', 
         alignItems: 'center', 
         background: '#2f8277',
         borderRadius: '50px', 
         padding: '4px 12px',
-        color: 'white',
-        border: '2px solid rgba(255, 255, 255, 0.6)',
+        color: '#cdcfce',
+        border: '1px solid rgba(145, 144, 144, 0.6)',
       }}>
-        <span style={{ color: 'white', fontWeight: 'bold', marginRight: '8px', fontSize: '18px' }}>৳</span>
+        <span style={{ color: '#cdcfce', marginRight: '4px', fontSize: '14px' }}>৳</span>
         <Input
-          placeholder="Amount"
+          placeholder="পরিমাণ"
           style={{
             border: 'none',
-            width: '120px',
+            width: '100px',
             boxShadow: 'none',
             background: 'transparent',
-            color: 'white',
-            fontSize: '16px',
+            color: '#cdcfce',
+            fontSize: '14px',
           }}
           type="number"
         />
@@ -139,14 +139,14 @@ const QuickDonateBar: React.FC = () => {
       <Button
         type="primary"
         style={{
-          height: '50px',
-          minWidth: '160px',
+          height: '40px',
+          minWidth: '100px',
           background: 'white',
           color: '#2f8277',
           borderRadius: '50px',
-          padding: '0 32px',
-          fontWeight: 700,
-          fontSize: '16px',
+          padding: '0 22px',
+          fontWeight: 500,
+          fontSize: '14px',
           transition: 'all 0.3s ease',
           transform: 'scale(1)',
         }}
@@ -157,7 +157,7 @@ const QuickDonateBar: React.FC = () => {
           e.currentTarget.style.transform = 'scale(1)';
         }}
       >
-        Donate Now
+        এখন দান করুন
       </Button>
 
       {/* Close Button - Only show when NOT at bottom */}
