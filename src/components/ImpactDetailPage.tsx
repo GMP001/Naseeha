@@ -13,6 +13,7 @@ interface AppealData {
   tag: string;
   heroImage?: string;
   heroDescription: string;
+  galleryImages?: string[];
   stats: {
     familiesSupported: string;
     peopleHelped: string;
@@ -47,6 +48,7 @@ const getAppealFromStorage = (slug: string): AppealData | null => {
         tag: appeal.tag,
         heroImage: appeal.heroImage || '',
         heroDescription: appeal.heroDescription,
+        galleryImages: appeal.galleryImages || [],
         stats: {
           familiesSupported: appeal.familiesSupported,
           peopleHelped: appeal.peopleHelped,
@@ -314,6 +316,36 @@ const getAppealFromStorage = (slug: string): AppealData | null => {
           <h2 style={{ fontSize: '32px', color: '#1f2937', fontWeight: 700, marginBottom: '24px' }}>আমাদের প্রতিক্রিয়া</h2>
           <div style={{ fontSize: '18px', lineHeight: '1.8', color: '#4b5563' }} dangerouslySetInnerHTML={{ __html: appealData.storyContent }} />
         </div>
+
+        {/* Image Gallery Section */}
+        {appealData.galleryImages && appealData.galleryImages.length > 0 && (
+          <div style={{ marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '32px', color: '#1f2937', fontWeight: 700, marginBottom: '32px', textAlign: 'center' }}>
+              ইমেজ গ্যালারি
+            </h2>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: '20px'
+            }}>
+              {appealData.galleryImages.map((img: string, index: number) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Gallery ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => window.open(img, '_blank')}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Where Your Donations Went */}
         {appealData.aidCategories.length > 0 && (

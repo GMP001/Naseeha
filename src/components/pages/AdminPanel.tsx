@@ -43,6 +43,7 @@ interface Appeal {
   isActive: boolean;
   closingStatement: string;
   heroImage?: string;
+  galleryImages?: string[];
 }
 
 const AdminPanel: React.FC = () => {
@@ -59,6 +60,8 @@ const AdminPanel: React.FC = () => {
   
   const [heroFileList, setHeroFileList] = useState<UploadFile[]>([]);
   const [galleryFileList, setGalleryFileList] = useState<UploadFile[]>([]);
+  const [appealHeroFileList, setAppealHeroFileList] = useState<UploadFile[]>([]);
+  const [appealGalleryFileList, setAppealGalleryFileList] = useState<UploadFile[]>([]); 
   
   // Dynamic fields for categories and FAQs
   const [categories, setCategories] = useState<any[]>([]);
@@ -255,6 +258,8 @@ const AdminPanel: React.FC = () => {
     appealForm.resetFields();
     setCategories(appeal?.aidCategories || []);
     setFaqs(appeal?.faqs || []);
+    setAppealHeroFileList([]);
+    setAppealGalleryFileList([]);
 
     if (appeal) {
       appealForm.setFieldsValue({
@@ -278,6 +283,21 @@ const AdminPanel: React.FC = () => {
     try {
       const values = await appealForm.validateFields();
       
+      // Handle hero image upload
+      let heroImage = editingAppeal?.heroImage || '';
+      if (appealHeroFileList.length > 0 && appealHeroFileList[0].originFileObj) {
+        heroImage = await convertToBase64(appealHeroFileList[0].originFileObj);
+      }
+      
+      // Handle gallery images upload
+      let galleryImages: string[] = editingAppeal?.galleryImages || [];
+      for (const file of appealGalleryFileList) {
+        if (file.originFileObj) {
+          const base64 = await convertToBase64(file.originFileObj);
+          galleryImages.push(base64);
+        }
+      }
+      
       // Auto-generate slug from title if not provided
       let slug = generateSlug(values.title);
       
@@ -297,6 +317,8 @@ const AdminPanel: React.FC = () => {
         partnerName: values.partnerName,
         isActive: values.isActive,
         closingStatement: values.closingStatement,
+        heroImage: heroImage,
+        galleryImages: galleryImages,
       };
 
       if (editingAppeal) {
@@ -455,6 +477,30 @@ const AdminPanel: React.FC = () => {
 
                 <Form.Item name="heroDescription" label="Main Description" rules={[{ required: true }]} tooltip="This appears at the top of the page">
                   <TextArea rows={3} placeholder="Write a brief description of this appeal..." />
+                </Form.Item>
+
+                <Form.Item label="Hero Image (Thumbnail)">
+                  <Upload 
+                    listType="picture-card" 
+                    fileList={appealHeroFileList} 
+                    onChange={({ fileList }) => setAppealHeroFileList(fileList)} 
+                    beforeUpload={() => false} 
+                    maxCount={1}
+                  >
+                    {appealHeroFileList.length < 1 && <div><UploadOutlined /><div>Upload</div></div>}
+                  </Upload>
+                </Form.Item>
+
+                <Form.Item label="Gallery Images (Multiple)">
+                  <Upload 
+                    listType="picture-card" 
+                    fileList={appealGalleryFileList} 
+                    onChange={({ fileList }) => setAppealGalleryFileList(fileList)} 
+                    beforeUpload={() => false} 
+                    multiple
+                  >
+                    <div><UploadOutlined /><div>Upload</div></div>
+                  </Upload>
                 </Form.Item>
 
                 <Form.Item name="isActive" label="Show as 'Current Appeal'" valuePropName="checked" tooltip="If checked, this will be highlighted as a current appeal on the homepage">
