@@ -38,6 +38,41 @@ const ImpactDetailPage: React.FC = () => {
   const [appealData, setAppealData] = useState<AppealData | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Add this function at the top of ImpactDetailPage.tsx
+  const getAppealFromStorage = (slug: string): AppealData | null => {
+    const savedAppeals = localStorage.getItem('naseeha-appeals');
+    if (savedAppeals) {
+      const appeals = JSON.parse(savedAppeals);
+      const appeal = appeals.find((a: any) => a.slug === slug);
+      if (appeal) {
+        return appeal;
+      }
+    }
+    return null;
+  };
+
+  // Then in your useEffect, replace the fetch with:
+  useEffect(() => {
+    const loadAppeal = () => {
+      if (!appealId) {
+        setLoading(false);
+        return;
+      }
+      
+      // First try to get from localStorage (admin panel)
+      const storedAppeal = getAppealFromStorage(appealId);
+      if (storedAppeal) {
+        setAppealData(storedAppeal);
+      } else {
+        // Fallback to default data
+        setAppealData(getFallbackData(appealId));
+      }
+      setLoading(false);
+    };
+
+    loadAppeal();
+  }, [appealId]);
+
   // Fetch data from your CMS/API
   useEffect(() => {
     const fetchAppealData = async () => {
@@ -395,310 +430,3 @@ const ImpactDetailPage: React.FC = () => {
 };
 
 export default ImpactDetailPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import { Button, Row, Col, Card } from 'antd';
-// import { ArrowLeftOutlined, HeartOutlined, TeamOutlined, DollarOutlined } from '@ant-design/icons';
-// import { useNavigate } from 'react-router-dom';
-
-// const GazaAppealDetail: React.FC = () => {
-//   const navigate = useNavigate();
-
-//   const impactStats = [
-//     { icon: <HeartOutlined />, value: "5,000+", label: "Families Supported" },
-//     { icon: <TeamOutlined />, value: "25,000+", label: "People Helped" },
-//     { icon: <DollarOutlined />, value: "£250K+", label: "Funds Raised" },
-//   ];
-
-//   const aidCategories = [
-//     {
-//       title: "Food Packs",
-//       description: "Nutritious food parcels distributed to families facing severe shortages and displacement across Gaza.",
-//       icon: "🍲",
-//       bgColor: "#fef3c7"
-//     },
-//     {
-//       title: "Dignity Packs",
-//       description: "Hygiene and dignity essentials delivered to women, children and the elderly during the most difficult conditions.",
-//       icon: "🧴",
-//       bgColor: "#fce7f3"
-//     },
-//     {
-//       title: "Essential Necessities",
-//       description: "Blankets, clean water and core household items provided directly to those who lost everything.",
-//       icon: "🏠",
-//       bgColor: "#dbeafe"
-//     },
-//     {
-//       title: "Urgent Medical Care",
-//       description: "Critical medical aid and supplies channelled to families through trusted partners on the ground.",
-//       icon: "🏥",
-//       bgColor: "#dcfce7"
-//     }
-//   ];
-
-//   return (
-//     <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-//       {/* Hero Section */}
-//       <div style={{ 
-//         background: 'linear-gradient(135deg, #1f2937 0%, #0f172a 100%)',
-//         padding: '80px 60px',
-//         color: 'white'
-//       }}>
-//         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-//           <Button 
-//             type="link" 
-//             onClick={() => navigate(-1)}
-//             style={{ 
-//               color: 'white', 
-//               padding: 0, 
-//               marginBottom: '40px',
-//               fontSize: '16px'
-//             }}
-//           >
-//             <ArrowLeftOutlined /> Back to Home
-//           </Button>
-          
-//           <span style={{
-//             background: 'rgba(255,255,255,0.2)',
-//             padding: '6px 16px',
-//             borderRadius: '30px',
-//             fontSize: '14px',
-//             display: 'inline-block',
-//             marginBottom: '20px'
-//           }}>
-//             Ramadan 2026 Appeal
-//           </span>
-          
-//           <h1 style={{ 
-//             fontSize: '52px', 
-//             fontWeight: 700,
-//             marginBottom: '20px',
-//             lineHeight: '1.2'
-//           }}>
-//             Standing With Gaza This Ramadan
-//           </h1>
-          
-//           <p style={{ 
-//             fontSize: '20px', 
-//             opacity: 0.9,
-//             maxWidth: '800px',
-//             lineHeight: '1.6'
-//           }}>
-//             In the blessed month of Ramadan 2026, the Taha Foundation launched the Gaza Appeal 
-//             in response to the worsening humanitarian crisis facing our brothers and sisters in Gaza.
-//           </p>
-//         </div>
-//       </div>
-
-//       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px' }}>
-        
-//         {/* Stats Section */}
-//         <Row gutter={[24, 24]} style={{ marginBottom: '60px' }}>
-//           {impactStats.map((stat, index) => (
-//             <Col xs={24} md={8} key={index}>
-//               <div style={{
-//                 background: 'white',
-//                 padding: '30px',
-//                 borderRadius: '16px',
-//                 textAlign: 'center',
-//                 boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-//                 transition: 'transform 0.3s ease'
-//               }}>
-//                 <div style={{ fontSize: '40px', color: '#2f8277', marginBottom: '16px' }}>
-//                   {stat.icon}
-//                 </div>
-//                 <div style={{ fontSize: '32px', fontWeight: 700, color: '#1f2937', marginBottom: '8px' }}>
-//                   {stat.value}
-//                 </div>
-//                 <div style={{ fontSize: '16px', color: '#6b7280' }}>{stat.label}</div>
-//               </div>
-//             </Col>
-//           ))}
-//         </Row>
-
-//         {/* Main Story Section */}
-//         <div style={{ 
-//           background: 'white',
-//           borderRadius: '20px',
-//           padding: '48px',
-//           marginBottom: '60px',
-//           boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
-//         }}>
-//           <h2 style={{ 
-//             fontSize: '32px', 
-//             color: '#1f2937', 
-//             fontWeight: 700,
-//             marginBottom: '24px'
-//           }}>
-//             Our Response
-//           </h2>
-          
-//           <div style={{ 
-//             fontSize: '18px', 
-//             lineHeight: '1.8', 
-//             color: '#4b5563',
-//             marginBottom: '32px'
-//           }}>
-//             <p style={{ marginBottom: '20px' }}>
-//               With families displaced, hospitals overwhelmed and basic supplies scarce, the urgency to act could not have been greater.
-//             </p>
-//             <p style={{ marginBottom: '20px' }}>
-//               Through the generosity of donors across the UK and beyond, we partnered with <strong style={{ color: '#2f8277' }}>Barakah Charity</strong> — 
-//               a trusted organisation with established teams operating directly inside Gaza — to deliver food packs, dignity packs, 
-//               essential household necessities, and urgent medical care to those most in need.
-//             </p>
-//             <p style={{ 
-//               fontStyle: 'italic', 
-//               padding: '20px',
-//               background: '#f0fdf4',
-//               borderRadius: '12px',
-//               borderLeft: '4px solid #2f8277'
-//             }}>
-//               Every donation, no matter the size, contributed to easing the suffering of a family during the holiest month of the year. 
-//               <strong> Jazakum Allahu Khairan</strong> to every donor, volunteer and supporter who stood with Gaza.
-//             </p>
-//           </div>
-//         </div>
-
-//         {/* Where Your Donations Went */}
-//         <h2 style={{ 
-//           fontSize: '32px', 
-//           color: '#1f2937', 
-//           fontWeight: 700,
-//           marginBottom: '32px',
-//           textAlign: 'center'
-//         }}>
-//           Where Your Donations Went
-//         </h2>
-        
-//         <Row gutter={[24, 24]} style={{ marginBottom: '60px' }}>
-//           {aidCategories.map((category, index) => (
-//             <Col xs={24} md={12} key={index}>
-//               <div style={{
-//                 background: 'white',
-//                 borderRadius: '16px',
-//                 padding: '28px',
-//                 height: '100%',
-//                 transition: 'transform 0.3s ease',
-//                 boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-//               }}>
-//                 <div style={{
-//                   fontSize: '48px',
-//                   marginBottom: '16px'
-//                 }}>
-//                   {category.icon}
-//                 </div>
-//                 <h3 style={{ 
-//                   fontSize: '22px', 
-//                   fontWeight: 700, 
-//                   color: '#1f2937',
-//                   marginBottom: '12px'
-//                 }}>
-//                   {category.title}
-//                 </h3>
-//                 <p style={{ 
-//                   fontSize: '16px', 
-//                   lineHeight: '1.6', 
-//                   color: '#6b7280'
-//                 }}>
-//                   {category.description}
-//                 </p>
-//               </div>
-//             </Col>
-//           ))}
-//         </Row>
-
-//         {/* Trust & Transparency Section */}
-//         <div style={{
-//           background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
-//           borderRadius: '20px',
-//           padding: '48px',
-//           marginBottom: '60px',
-//           textAlign: 'center'
-//         }}>
-//           <h2 style={{ 
-//             fontSize: '28px', 
-//             color: '#1f2937', 
-//             fontWeight: 700,
-//             marginBottom: '16px'
-//           }}>
-//             Delivered with Trust & Transparency
-//           </h2>
-//           <p style={{ 
-//             fontSize: '18px', 
-//             color: '#4b5563',
-//             maxWidth: '800px',
-//             margin: '0 auto 32px',
-//             lineHeight: '1.7'
-//           }}>
-//             Aid was delivered through our verified partner Barakah Charity, with on-the-ground teams ensuring every contribution 
-//             reached vulnerable families directly. Updates and field evidence were shared with our community throughout the campaign.
-//           </p>
-//         </div>
-
-//         {/* Continue Supporting */}
-//         <div style={{
-//           background: 'white',
-//           borderRadius: '20px',
-//           padding: '48px',
-//           textAlign: 'center',
-//           border: '1px solid #e5e7eb'
-//         }}>
-//           <h2 style={{ 
-//             fontSize: '28px', 
-//             color: '#1f2937', 
-//             fontWeight: 700,
-//             marginBottom: '16px'
-//           }}>
-//             Continue Supporting Our Work
-//           </h2>
-//           <p style={{ 
-//             fontSize: '18px', 
-//             color: '#6b7280',
-//             marginBottom: '32px'
-//           }}>
-//             The Ramadan 2026 Gaza Appeal has now closed, but our humanitarian mission continues. 
-//             Explore our live appeals to keep making a difference.
-//           </p>
-//           <Button 
-//             type="primary"
-//             style={{
-//               background: '#2f8277',
-//               borderColor: '#2f8277',
-//               padding: '12px 32px',
-//               height: 'auto',
-//               fontSize: '16px',
-//               fontWeight: 600,
-//               borderRadius: '8px'
-//             }}
-//           >
-//             View Current Appeals →
-//           </Button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default GazaAppealDetail;
-

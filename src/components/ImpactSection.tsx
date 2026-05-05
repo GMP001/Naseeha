@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-const impactStories = [
+// Default fallback stories (will only show if no data in localStorage)
+const defaultImpactStories = [
   {
     id: 1,
     tag: "Previous Appeal",
@@ -32,6 +33,36 @@ const impactStories = [
 
 const ImpactSection: React.FC = () => {
   const navigate = useNavigate();
+  const [impactStories, setImpactStories] = useState(defaultImpactStories);
+
+  // Load appeals from localStorage (admin panel) on component mount
+  useEffect(() => {
+    const loadAppealsFromStorage = () => {
+      try {
+        const savedAppeals = localStorage.getItem('naseeha-appeals');
+        if (savedAppeals) {
+          const appeals = JSON.parse(savedAppeals);
+          if (appeals && appeals.length > 0) {
+            // Format appeals from admin panel to match the component's structure
+            const formattedStories = appeals.map((appeal: any, index: number) => ({
+              id: appeal.id || index + 1,
+              tag: appeal.isActive ? "Current Appeal" : "Previous Appeal",
+              title: appeal.title,
+              image: appeal.heroImage || defaultImpactStories[0]?.image || "https://images.unsplash.com/photo-1582213782179-2c2f8f9c4b5e?w=800",
+              description: appeal.heroDescription?.substring(0, 150) + (appeal.heroDescription?.length > 150 ? "..." : "") || appeal.title,
+              detailPath: `/appeal/${appeal.slug}`
+            }));
+            setImpactStories(formattedStories);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading appeals from localStorage:', error);
+        // Keep using default stories if error occurs
+      }
+    };
+
+    loadAppealsFromStorage();
+  }, []);
 
   const handleViewStory = (path: string) => {
     navigate(path);

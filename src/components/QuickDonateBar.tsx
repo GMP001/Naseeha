@@ -59,7 +59,7 @@ const QuickDonateBar: React.FC<QuickDonateBarProps> = ({ onDonateClick }) => {
       {/* Type Dropdown */}
       <Select 
         defaultValue="general" 
-        style={{ width: 120, borderRadius: '50px', height: '40px' }}
+        style={{ width: 120, borderRadius: '50px', height: '40px', backgroundColor: '#2b8478e7', color: '#cdcfce' }}
       >
         <Option value="general">প্রকার</Option>
         <Option value="zakat">জাকাত</Option>
@@ -70,9 +70,9 @@ const QuickDonateBar: React.FC<QuickDonateBarProps> = ({ onDonateClick }) => {
       {/* Campaign Dropdown */}
       <Select 
         defaultValue="emergency" 
-        style={{ width: 140, borderRadius: '50px', height: '40px' }}
+        style={{ width: 140, borderRadius: '50px', height: '40px', backgroundColor: '#2b8478e7', color: '#cdcfce' }}
       >
-        <Option value="emergency">প্রচারণা</Option>
+        <Option value="emergency">ক্যাম্পেইন</Option>
         <Option value="qurbani2026">কুরবানি ২০২৬</Option>
       </Select>
 
