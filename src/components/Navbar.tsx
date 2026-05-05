@@ -1,8 +1,10 @@
 // src/components/Navbar.tsx
 import React, { useState, useEffect } from 'react';
 import { Button } from 'antd';
+import DonationModal from './DonationModal';
 
 const Navbar: React.FC = () => {
+const [isModalOpen, setIsModalOpen] = useState(false);  
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -138,10 +140,15 @@ const Navbar: React.FC = () => {
             border: 'none',
             boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
           }}
+          onClick={() => setIsModalOpen(true)}
         >
           অনুদান দিন ❤️
         </Button>
       </div>
+      <DonationModal 
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+    />
     </nav>
   );
 };

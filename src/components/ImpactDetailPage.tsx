@@ -1,3 +1,5 @@
+//E:/naseeha-foundation/naseeha-foundation/src/components/ImpactDetailPage.tsx
+
 import React, { useState, useEffect } from 'react';
 import { Button, Row, Col, Collapse } from 'antd';
 import { ArrowLeftOutlined, HeartOutlined, TeamOutlined, DollarOutlined } from '@ant-design/icons';
@@ -9,7 +11,7 @@ interface AppealData {
   id: string;
   title: string;
   tag: string;
-  heroImage: string;
+  heroImage?: string;
   heroDescription: string;
   stats: {
     familiesSupported: string;
@@ -17,15 +19,8 @@ interface AppealData {
     fundsRaised: string;
   };
   storyContent: string;
-  aidCategories: Array<{
-    title: string;
-    description: string;
-    icon: string;
-  }>;
-  faqs: Array<{
-    question: string;
-    answer: string;
-  }>;
+  aidCategories: Array<{ title: string; description: string; icon: string }>;
+  faqs: Array<{ question: string; answer: string }>;
   trustStatement: string;
   partnerName: string;
   isActive: boolean;
@@ -38,22 +33,42 @@ const ImpactDetailPage: React.FC = () => {
   const [appealData, setAppealData] = useState<AppealData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Add this function at the top of ImpactDetailPage.tsx
-  const getAppealFromStorage = (slug: string): AppealData | null => {
-    const savedAppeals = localStorage.getItem('naseeha-appeals');
-    if (savedAppeals) {
-      const appeals = JSON.parse(savedAppeals);
-      const appeal = appeals.find((a: any) => a.slug === slug);
-      if (appeal) {
-        return appeal;
-      }
+  // Function to get appeal from localStorage
+const getAppealFromStorage = (slug: string): AppealData | null => {
+  const savedAppeals = localStorage.getItem('naseeha-appeals');
+  if (savedAppeals) {
+    const appeals = JSON.parse(savedAppeals);
+    const appeal = appeals.find((a: any) => a.slug === slug);
+    if (appeal) {
+      // Transform to match the component's expected shape
+      return {
+        id: appeal.id,
+        title: appeal.title,
+        tag: appeal.tag,
+        heroImage: appeal.heroImage || '',
+        heroDescription: appeal.heroDescription,
+        stats: {
+          familiesSupported: appeal.familiesSupported,
+          peopleHelped: appeal.peopleHelped,
+          fundsRaised: appeal.fundsRaised,
+        },
+        storyContent: appeal.storyContent,
+        aidCategories: appeal.aidCategories,
+        faqs: appeal.faqs,
+        trustStatement: appeal.trustStatement,
+        partnerName: appeal.partnerName,
+        isActive: appeal.isActive,
+        closingStatement: appeal.closingStatement,
+      };
     }
-    return null;
-  };
+  }
+  return null;
+};
 
-  // Then in your useEffect, replace the fetch with:
+  // Load appeal data from localStorage
   useEffect(() => {
     const loadAppeal = () => {
+      setLoading(true);
       if (!appealId) {
         setLoading(false);
         return;
@@ -73,32 +88,6 @@ const ImpactDetailPage: React.FC = () => {
     loadAppeal();
   }, [appealId]);
 
-  // Fetch data from your CMS/API
-  useEffect(() => {
-    const fetchAppealData = async () => {
-      try {
-        // Check if appealId exists
-        if (!appealId) {
-          console.log('No appeal ID provided');
-          setLoading(false);
-          return;
-        }
-
-        // This should fetch from your admin panel's API
-        const response = await fetch(`/api/appeals/${appealId}`);
-        const data = await response.json();
-        setAppealData(data);
-      } catch (error) {
-        console.log('Using fallback data');
-        // Pass the appealId safely (it's confirmed to exist here)
-        setAppealData(getFallbackData(appealId || 'default'));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAppealData();
-  }, [appealId]);
 
   const getFallbackData = (id: string): AppealData => {
     // Return different data based on appeal ID
@@ -322,7 +311,7 @@ const ImpactDetailPage: React.FC = () => {
 
         {/* Main Story Section */}
         <div style={{ background: 'white', borderRadius: '20px', padding: '48px', marginBottom: '60px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-          <h2 style={{ fontSize: '32px', color: '#1f2937', fontWeight: 700, marginBottom: '24px' }}>Our Response</h2>
+          <h2 style={{ fontSize: '32px', color: '#1f2937', fontWeight: 700, marginBottom: '24px' }}>আমাদের প্রতিক্রিয়া</h2>
           <div style={{ fontSize: '18px', lineHeight: '1.8', color: '#4b5563' }} dangerouslySetInnerHTML={{ __html: appealData.storyContent }} />
         </div>
 
@@ -330,7 +319,7 @@ const ImpactDetailPage: React.FC = () => {
         {appealData.aidCategories.length > 0 && (
           <>
             <h2 style={{ fontSize: '32px', color: '#1f2937', fontWeight: 700, marginBottom: '32px', textAlign: 'center' }}>
-              Where Your Donations Went
+              আপনার দান গুলো কোথায় দেয়া হল?
             </h2>
             
             <Row gutter={[24, 24]} style={{ marginBottom: '60px' }}>
@@ -351,7 +340,7 @@ const ImpactDetailPage: React.FC = () => {
         {appealData.faqs.length > 0 && (
           <div style={{ background: 'white', borderRadius: '20px', padding: '48px', marginBottom: '60px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
             <h2 style={{ fontSize: '32px', color: '#1f2937', fontWeight: 700, marginBottom: '32px', textAlign: 'center' }}>
-              Frequently Asked Questions
+              সচরাচর করা প্রশ্নগুলোঃ
             </h2>
             <Collapse 
               bordered={false} 
@@ -387,7 +376,7 @@ const ImpactDetailPage: React.FC = () => {
           textAlign: 'center'
         }}>
           <h2 style={{ fontSize: '28px', color: '#1f2937', fontWeight: 700, marginBottom: '16px' }}>
-            Delivered with Trust & Transparency
+            বিশ্বাস ও স্বচ্ছতার সাথে সরবরাহ করা হয়েছে
           </h2>
           <p style={{ fontSize: '18px', color: '#4b5563', maxWidth: '800px', margin: '0 auto', lineHeight: '1.7' }}>
             {appealData.trustStatement}
@@ -403,7 +392,7 @@ const ImpactDetailPage: React.FC = () => {
           border: '1px solid #e5e7eb'
         }}>
           <h2 style={{ fontSize: '28px', color: '#1f2937', fontWeight: 700, marginBottom: '16px' }}>
-            Continue Supporting Our Work
+            আমাদের কাজকে সমর্থন করতে থাকুন
           </h2>
           <p style={{ fontSize: '18px', color: '#6b7280', marginBottom: '32px' }}>
             {appealData.closingStatement}
@@ -421,7 +410,7 @@ const ImpactDetailPage: React.FC = () => {
               borderRadius: '8px'
             }}
           >
-            View Current Appeals →
+            বর্তমান আবেদন গুলো দেখুন →
           </Button>
         </div>
       </div>

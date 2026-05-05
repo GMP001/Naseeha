@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
+import DonationModal from './DonationModal';
 
 const appeals = [
   {
@@ -29,7 +30,9 @@ const appeals = [
   },
 ];
 
+
 const AppealsSection: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section style={{ padding: '80px 60px', backgroundColor: '#f8fafc' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
@@ -84,6 +87,7 @@ const AppealsSection: React.FC = () => {
                     marginTop: '16px',
                     backgroundColor: '#2f8277'
                   }}
+                  onClick={() => setIsModalOpen(true)}
                 >
                   <HeartOutlined /> অনুদান দিন
                 </Button>
@@ -91,6 +95,10 @@ const AppealsSection: React.FC = () => {
             </div>
           ))}
         </div>
+        <DonationModal 
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       </div>
     </section>
   );

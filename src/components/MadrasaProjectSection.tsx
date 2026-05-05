@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { CalendarOutlined, HomeOutlined, AimOutlined } from '@ant-design/icons';
+import DonationModal from './DonationModal';
+
 
 const MadrasaProjectSection: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section style={{ 
       padding: '100px 60px', 
@@ -134,9 +137,14 @@ const MadrasaProjectSection: React.FC = () => {
             borderRadius: '50px',
             backgroundColor: '#2f8277'
           }}
+          onClick={() => setIsModalOpen(true)}
         >
           মাদরাসাতুস নাসীহা প্রকল্পে অনুদান দিন →
         </Button>
+        <DonationModal 
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
 
       </div>
     </section>

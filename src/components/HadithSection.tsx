@@ -7,7 +7,7 @@ const HadithSection: React.FC = () => {
     <section style={{
       position: 'relative',
       padding: '120px 60px',
-      color: 'white',
+      color: '#07f5d6',
       textAlign: 'center',
       backgroundImage: `url(${bgPattern})`, // ← Put your image here
       backgroundSize: 'cover',
@@ -23,13 +23,8 @@ const HadithSection: React.FC = () => {
       }} />
 
       <div style={{ position: 'relative', zIndex: 2, maxWidth: '1000px', margin: '0 auto' }}>
-        {/* Opening Quote */}
-        <div style={{ fontSize: '80px', opacity: 0.3, marginBottom: '-30px' }}>
-        “
-        </div>
-
         <p style={{
-          fontSize: '28px',
+          fontSize: '40px',
           lineHeight: '1.6',
           fontStyle: 'italic',
           marginBottom: '40px',
@@ -37,31 +32,20 @@ const HadithSection: React.FC = () => {
           marginLeft: 'auto',
           marginRight: 'auto',
         }}>
-          রাসূলুল্লাহ ﷺ বলেছেন: <br />
-          “সে ব্যক্তি মুমিন নয়, যার পেট ভরে যায় অথচ তার পাশের প্রতিবেশী ক্ষুধার্ত থাকে।”
+          <span style={{ fontSize: '40px', opacity: 0.5, verticalAlign: 'middle' }}>“</span>
+          রাসূলুল্লাহ ﷺ বলেছেন: সে ব্যক্তি মুমিন নয়, যার পেট ভরে যায় অথচ তার পাশের প্রতিবেশী ক্ষুধার্ত থাকে।
+          <span style={{ fontSize: '40px', opacity: 0.5, verticalAlign: 'middle' }}>”</span>
         </p>
 
         {/* Reference */}
         <p style={{
-          fontSize: '18px',
+          fontSize: '20px',
           opacity: 0.9,
+          fontStyle: 'italic',
           fontWeight: 500
         }}>
           — ইবনে আব্বাস (রা.) থেকে বর্ণিত, আল-সুনান আল-কুবরা ১৯০৪৯
         </p>
-
-        {/* Closing Quote */}
-        <div style={{ 
-          fontSize: '80px', 
-          opacity: 0.3, 
-          marginTop: '-20px',
-          textAlign: 'right',
-          maxWidth: '900px',
-          marginLeft: 'auto',
-          marginRight: 'auto'
-        }}>
-          ”
-        </div>
       </div>
     </section>
   );

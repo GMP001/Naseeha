@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
+import DonationModal from './DonationModal';
 
 const heroImages = [
   '/src/assets/Charity-kid.png'
 ];
 
 const Hero: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [current, setCurrent] = useState(0);
   const [next, setNext] = useState(1);
   const [fade, setFade] = useState(false);
@@ -153,11 +155,16 @@ const Hero: React.FC = () => {
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'scale(1)';
               }}
+              onClick={() => setIsModalOpen(true)}
             >
               অনুদান দিন
             </Button>
           </div>
         </div>
+        <DonationModal 
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </section>
   );

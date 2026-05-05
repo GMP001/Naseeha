@@ -1,3 +1,5 @@
+//E:/naseeha-foundation/naseeha-foundation/src/components/ImpactSection.tsx
+
 import React, { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
@@ -160,7 +162,7 @@ const ImpactSection: React.FC = () => {
                     fontWeight: 600 
                   }}
                 >
-                  View Full Story <ArrowRightOutlined />
+                  সম্পূর্ণ স্টোরি দেখুন <ArrowRightOutlined />
                 </Button>
               </div>
             </div>
